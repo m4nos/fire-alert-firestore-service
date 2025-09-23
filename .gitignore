@@ -2,3 +2,4 @@
 firebaseServiceAccountKey.json
 keys.js
 markersCache.json
+.env

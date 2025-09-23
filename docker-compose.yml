@@ -1,0 +1,22 @@
+version: "3.9"
+
+services:
+  firestore-service:
+    image: fire-alert-firestore-service:local
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    environment:
+      # Set production env
+      - NODE_ENV=production
+    env_file:
+      - .env
+    volumes:
+      # Persist the cache file across restarts
+      - ./markersCache.json:/app/markersCache.json
+      # Mount secrets at runtime (ensure files exist locally)
+      - ./firebaseServiceAccountKey.json:/app/firebaseServiceAccountKey.json:ro
+    # No ports to expose; service runs background cron jobs
+
+volumes:

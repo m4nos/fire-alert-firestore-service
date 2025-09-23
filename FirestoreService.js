@@ -4,7 +4,6 @@ import { parse } from "csv-parse/sync";
 import haversine from 'haversine-distance';
 import fs from 'fs';
 import path from 'path';
-import { MODIS_VIIRS_KEY } from "./keys.js";
 import serviceAccount from "./firebaseServiceAccountKey.json" with { type: "json" };
 import { getMessaging } from 'firebase-admin/messaging';
 
@@ -65,10 +64,10 @@ class FirestoreService {
   async fetchWildfireData() {
     try {
       const CSVResponse = await axios.get(
-        `https://firms.modaps.eosdis.nasa.gov/api/country/csv/${MODIS_VIIRS_KEY}/VIIRS_SNPP_NRT/GRC/1`,
+        `https://firms.modaps.eosdis.nasa.gov/api/country/csv/${process.env.MODIS_VIIRS_KEY}/VIIRS_SNPP_NRT/GRC/1`,
         {
           params: {
-            key: MODIS_VIIRS_KEY,
+            key: process.env.MODIS_VIIRS_KEY,
           },
         }
       );
