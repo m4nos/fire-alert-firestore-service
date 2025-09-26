@@ -99,18 +99,18 @@ class FirestoreService {
         return distance < threshold;
       });
 
-      // Check if the new marker has no neighboring markers within the proximityDistance
-      const hasNoNearbyMarkers = !newData.some((otherEvent) => {
-        if (otherEvent === newEvent) return false; // Skip the same event
-        const otherMarkerCoords = {
-          latitude: parseFloat(otherEvent.latitude),
-          longitude: parseFloat(otherEvent.longitude),
-        };
-        const distance = haversine(newMarkerCoords, otherMarkerCoords);
-        return distance < proximityDistance;
-      });
+      // // Check if the new marker has no neighboring markers within the proximityDistance
+      // const hasNoNearbyMarkers = !newData.some((otherEvent) => {
+      //   if (otherEvent === newEvent) return false; // Skip the same event
+      //   const otherMarkerCoords = {
+      //     latitude: parseFloat(otherEvent.latitude),
+      //     longitude: parseFloat(otherEvent.longitude),
+      //   };
+      //   const distance = haversine(newMarkerCoords, otherMarkerCoords);
+      //   return distance < proximityDistance;
+      // });
 
-      return isFarFromExistingMarkers && !hasNoNearbyMarkers;
+      return isFarFromExistingMarkers;
     });
   }
 
